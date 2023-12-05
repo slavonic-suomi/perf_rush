@@ -1,0 +1,17 @@
+FROM gradle:8-jdk21-graal AS build
+
+WORKDIR /app
+
+COPY src ./src
+COPY build.gradle.kts .
+
+RUN gradle nativeCompile
+
+
+FROM ubuntu
+
+WORKDIR /app
+
+COPY --from=build --chmod=0755 /app/build/native/nativeCompile/app /app/native_app
+
+ENTRYPOINT ["/app/native_app"]
