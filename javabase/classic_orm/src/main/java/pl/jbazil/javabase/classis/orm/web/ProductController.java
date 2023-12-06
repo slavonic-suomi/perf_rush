@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.jbazil.javabase.classis.orm.domain.model.ProductModel;
+import pl.jbazil.javabase.classis.orm.domain.service.ProductService;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
 @RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductController {
+
+    private final ProductService productService;
 
     public static final List<ProductModel> cache = List.of(
             new ProductModel(1L, "phone 1", "code 1", new BigDecimal("1.72"), 1L),
@@ -25,6 +28,11 @@ public class ProductController {
     @GetMapping("/cache")
     public List<ProductModel> getCache() {
         return cache;
+    }
+
+    @GetMapping("/")
+    public List<ProductModel> getAll() {
+        return productService.findAll(0, 100);
     }
 
 }
