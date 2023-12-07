@@ -29,7 +29,7 @@ class CategoryStorageImpl implements CategoryStorage {
         List<CategoryEntity> categories = categoryRepository.findAll(PageRequest.of(pageNum, pageSize)).getContent();
         categories.forEach(category -> {
             List<ProductEntity> products = productRepository.findAllByCategoryIdOrderByRatingDesc(category.getId(), Pageable.ofSize(topProductsCount));
-            category.setProducts(products);
+            category.setProducts(products); //bad approach
         });
 
         return categories.stream().map(categoryMapper::entityToModel).toList();

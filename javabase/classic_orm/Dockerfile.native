@@ -10,15 +10,21 @@ RUN gradle nativeCompile
 
 FROM ubuntu:22.04
 
-RUN apt-get update && apt-get install -y --no-install-recommends wget
+RUN apt-get update -qq && apt-get install -y --no-install-recommends wget ca-certificates
 
-#TODO check cert issue
-RUN wget https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_amd64.deb --no-check-certificate
+RUN wget https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_amd64.deb
 RUN dpkg -i dumb-init_*.deb
 
-WORKDIR /app
+RUN apt-get purge --auto-remove -y wget && apt-get autoremove && apt-get clean
 
-COPY --from=build --chmod=0755 /app/build/native/nativeCompile/app /app/native_app
+RUN useradd -m appuser
+
+WORKDIR /app
+RUN chown -R appuser:appuser /app
+
+COPY --from=build --chown=appuser:appuser --chmod=0755 /app/build/native/nativeCompile/app /app/native_app
+
+USER appuser
 
 ENTRYPOINT ["dumb-init", "--"]
 CMD ["/app/native_app"]

@@ -17,8 +17,8 @@ public class CategoryMapper implements PersistenceMapper<CategoryModel, Category
     public CategoryEntity modelToEntity(CategoryModel model) {
         return CategoryEntity
                 .builder()
-                .id(model.getId())
-                .name(model.getName())
+                .id(model.id())
+                .name(model.name())
                 .build();
     }
 

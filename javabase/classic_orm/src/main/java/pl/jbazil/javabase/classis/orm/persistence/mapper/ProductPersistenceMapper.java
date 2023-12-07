@@ -16,14 +16,14 @@ public class ProductPersistenceMapper implements PersistenceMapper<ProductModel,
     @Override
     public ProductEntity modelToEntity(ProductModel model) {
         //be careful - reference is NOT a real entity, just a proxy
-        CategoryEntity categoryReference = categoryRepository.getReferenceById(model.getCategoryId());
+        CategoryEntity categoryReference = categoryRepository.getReferenceById(model.categoryId());
 
         return ProductEntity
                 .builder()
-                .id(model.getId())
-                .rating(model.getRating())
-                .name(model.getName())
-                .code(model.getCode())
+                .id(model.id())
+                .rating(model.rating())
+                .name(model.name())
+                .code(model.code())
                 .category(categoryReference)
                 .build();
     }

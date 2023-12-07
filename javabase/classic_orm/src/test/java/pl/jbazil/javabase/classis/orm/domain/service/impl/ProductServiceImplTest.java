@@ -22,7 +22,7 @@ class ProductServiceImplTest {
         ProductModel testProduct = productService.createRandom("Test random product", 1L);
 
         assertNotNull(testProduct);
-        assertNotNull(testProduct.getId());
+        assertNotNull(testProduct.id());
         log.info("Created product: " + testProduct);
     }
 }
