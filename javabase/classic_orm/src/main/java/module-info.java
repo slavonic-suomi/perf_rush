@@ -5,6 +5,7 @@ module perf.rush.javabase.classic.orm.main {
     requires spring.boot;
     requires spring.context;
     requires spring.tx;
+    requires spring.beans;
     requires spring.data.jpa;
     requires spring.data.commons;
     requires spring.boot.autoconfigure;

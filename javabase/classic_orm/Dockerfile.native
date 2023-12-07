@@ -5,7 +5,7 @@ WORKDIR /app
 COPY src ./src
 COPY build.gradle.kts .
 
-RUN gradle nativeCompile
+RUN gradle nativeCompile -x test
 
 
 FROM ubuntu:22.04

@@ -1,3 +1,5 @@
+third_party:
+  delay: 20 #milisec value to imitate external service delay
 spring:
   jpa:
     hibernate:
