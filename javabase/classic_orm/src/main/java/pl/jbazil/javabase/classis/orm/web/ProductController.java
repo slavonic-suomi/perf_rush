@@ -2,13 +2,11 @@ package pl.jbazil.javabase.classis.orm.web;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.jbazil.javabase.classis.orm.domain.model.ProductModel;
 import pl.jbazil.javabase.classis.orm.domain.service.ProductService;
 import pl.jbazil.javabase.classis.orm.external.ThirdPartyService;
+import pl.jbazil.javabase.classis.orm.web.model.CreateRandomProductRequest;
 
 import java.util.List;
 
@@ -60,5 +58,11 @@ public class ProductController {
         var result = productService.findAll(0, 100);
         log.info("Retrieving data from external db (" + measure + " delay)");
         return result;
+    }
+
+    @PostMapping("/")
+    public ProductModel createRandom(@RequestBody CreateRandomProductRequest createRequest) {
+        log.info("Creating new product: " + createRequest);
+        return productService.createRandom(createRequest.getName(), createRequest.getCategoryId());
     }
 }

@@ -1,7 +1,8 @@
 insert into category (name)
 values ('phones'),
        ('laptops'),
-       ('smartwatches');
+       ('smartwatches'),
+       ('other');
 
 insert into product (name, code, rating, category_id)
 values

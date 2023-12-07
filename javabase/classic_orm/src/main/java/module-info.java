@@ -11,4 +11,5 @@ module perf.rush.javabase.classic.orm.main {
     requires spring.boot.autoconfigure;
 
     requires jakarta.persistence;
+    requires com.fasterxml.jackson.annotation;
 }
