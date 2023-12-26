@@ -1,4 +1,4 @@
-package pl.jbazil.javabase.classis.orm.web.model;
+package pl.jbazil.javabase.classis.orm.web.model.product;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

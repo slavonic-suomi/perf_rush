@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import pl.jbazil.javabase.classis.orm.domain.model.ProductModel;
 import pl.jbazil.javabase.classis.orm.domain.service.ProductService;
 import pl.jbazil.javabase.classis.orm.external.ThirdPartyService;
-import pl.jbazil.javabase.classis.orm.web.model.CreateRandomProductRequest;
+import pl.jbazil.javabase.classis.orm.web.model.product.CreateRandomProductRequest;
+import pl.jbazil.javabase.classis.orm.web.model.product.UpdateProductRatingRequest;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Log
@@ -64,5 +66,11 @@ public class ProductController {
     public ProductModel createRandom(@RequestBody CreateRandomProductRequest createRequest) {
         log.info("Creating new product: " + createRequest);
         return productService.createRandom(createRequest.getName(), createRequest.getCategoryId());
+    }
+
+    @PutMapping("{id}/rating")
+    public ProductModel updateRating(@PathVariable("id") Long id, @RequestBody UpdateProductRatingRequest updateRequest) {
+        log.info("Updating product " + id + " with rating: " + updateRequest.getRating());
+        return productService.updateRating(id, new BigDecimal(updateRequest.getRating()));
     }
 }

@@ -16,6 +16,7 @@ import pl.jbazil.javabase.classis.orm.persistence.repository.ProductRepository;
 import java.util.List;
 
 @Repository
+@Transactional
 @RequiredArgsConstructor
 class CategoryStorageImpl implements CategoryStorage {
     private final CategoryRepository categoryRepository;
@@ -33,5 +34,11 @@ class CategoryStorageImpl implements CategoryStorage {
         });
 
         return categories.stream().map(categoryMapper::entityToModel).toList();
+    }
+
+    @Override
+    public CategoryModel create(String name) {
+        CategoryEntity entity = categoryRepository.save(new CategoryEntity(null, name, null));
+        return categoryMapper.entityToModel(entity);
     }
 }

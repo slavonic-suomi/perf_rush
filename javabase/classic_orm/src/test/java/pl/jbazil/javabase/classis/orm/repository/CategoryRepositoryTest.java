@@ -27,7 +27,7 @@ public class CategoryRepositoryTest {
         List<CategoryEntity> all = categoryRepository.findAll();
         log.info("Found existing data: " + all);
 
-        assertEquals(3, all.size()); //from flyway 'test data' script
+        assertEquals(4, all.size()); //from flyway 'test data' script
     }
 
     @Test

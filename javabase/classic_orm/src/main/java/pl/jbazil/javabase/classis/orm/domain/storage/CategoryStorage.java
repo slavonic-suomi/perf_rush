@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface CategoryStorage {
     List<CategoryModel> findAllWithTopProducts(int pageNum, int pageSize, int topProductsCount);
+
+    CategoryModel create(String name);
 }

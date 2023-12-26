@@ -18,4 +18,9 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryModel> findAllWithTopProducts(int pageNum, int pageSize, int topProductsCount) {
         return categoryStorage.findAllWithTopProducts(pageNum, pageSize, topProductsCount);
     }
+
+    @Override
+    public CategoryModel create(String name) {
+        return categoryStorage.create(name);
+    }
 }

@@ -32,11 +32,21 @@ class ProductServiceImpl implements ProductService {
                 categoryId
         );
 
-        return productStorage.save(model);
+        return productStorage.create(model);
     }
 
     @Override
     public List<ProductModel> findAll(int pageNum, int pageSize) {
         return productStorage.findAll(pageNum, pageSize);
+    }
+
+    @Override
+    public ProductModel updateRating(Long id, BigDecimal rating) {
+        return productStorage.updateRating(id, rating);
+    }
+
+    @Override
+    public ProductModel findById(Long id) {
+        return productStorage.findById(id);
     }
 }

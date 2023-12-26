@@ -11,6 +11,7 @@ import pl.jbazil.javabase.classis.orm.persistence.entity.ProductEntity;
 import pl.jbazil.javabase.classis.orm.persistence.mapper.PersistenceMapper;
 import pl.jbazil.javabase.classis.orm.persistence.repository.ProductRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -22,9 +23,17 @@ public class ProductStorageImpl implements ProductStorage {
     private final PersistenceMapper<ProductModel, ProductEntity> mapper;
 
     @Override
-    public ProductModel save(ProductModel product) {
+    public ProductModel create(ProductModel product) {
         ProductEntity entity = mapper.modelToEntity(product);
         entity = productRepository.save(entity);
+        return mapper.entityToModel(entity);
+    }
+
+    @Override
+    public ProductModel updateRating(Long id, BigDecimal rating) {
+        ProductEntity entity = productRepository.findById(id).orElseThrow();
+        entity.setRating(rating);
+        productRepository.save(entity);
         return mapper.entityToModel(entity);
     }
 
@@ -36,5 +45,11 @@ public class ProductStorageImpl implements ProductStorage {
                 .stream()
                 .map(mapper::entityToModel)
                 .toList();
+    }
+
+    @Override
+    public ProductModel findById(Long id) {
+        ProductEntity entity = productRepository.findById(id).orElseThrow();
+        return mapper.entityToModel(entity);
     }
 }
